@@ -33,31 +33,39 @@ Check out the video presentation of **Upload AI** to see the tool in action! Thi
 Upload AI is a YouTube video upload tool that not only simplifies the process, but also generates catchy titles, engaging descriptions, and this is just the beginning, in the future, this tool will have even more amazing features.
 
 ### 🔧 Key Focus Areas
-♿ Accessibility: Designed for everyone, ensuring usability across all abilities.
 
-🔒 Web Security: Robust measures to protect user data and transactions.
+#### ♿ Accessibility
+- **Inclusive Design**: Built for everyone, ensuring seamless usability across all abilities and devices.
 
-💻 Modern Technologies: Built with Webpack, Node.js, TypeScript, React.js, and more.
+#### 🔒 Web Security
+- **Data Protection**: Implementing robust security measures to safeguard user data and transactions.
 
-🎨 Design & UX: A visually appealing interface with a focus on responsive design.
+#### 💻 Modern Technologies
+- **Frontend Framework**: Developed using **Angular** for dynamic and responsive user interfaces.
+- **Backend & Tools**: Powered by **Node.js** and **TypeScript** to ensure performance and scalability.
 
-🧼 Clean Code: Emphasizing best practices in performance optimization and documentation.
+#### 🎨 UI/UX Design
+- **Responsive Design**: A visually appealing interface that adapts seamlessly to different screen sizes.
+- **UI Framework**: **Bootstrap** integrated for faster and efficient UI development.
 
-🛠️ Workflow: Managed with Git, GitHub, GitLab, ESLint, and Git Flow for efficient collaboration.
+#### 🧼 SOLID Principles
+- **Maintainability**: Following SOLID principles to enhance code quality, making it scalable and easy to maintain.
 
-🚀 Advanced Concepts: Exploring micro-front ends, asynchronous programming, and more.
+#### 🛠️ Development Workflow
+- **Version Control & Collaboration**: Managed with **Git**, **GitHub**, **Git Flow**, and **ESLint** to ensure smooth collaboration and code consistency.
+- **Automation**: Leveraging **git hooks** to automate repetitive tasks and enforce best practices.
 
-☁️ Cloud Integration: Leveraging AWS for scalable, reliable cloud services.
+#### 🐞 Debugging & Testing
+- **Test-Driven Development (TDD)**: Ensuring high code quality and reliability through testing.
+- **Testing Framework**: Using **Jest** to write and maintain comprehensive unit tests.
 
-📦 UI Frameworks: Using Bootstrap and styled-components for streamlined development.
+#### 🏛️ Architecture
+- **Clean Architecture**: Implementing clean architecture principles for a scalable, maintainable, and well-organized codebase.
 
-🔗 API Development: Efficient data exchange with REST APIs.
+---
 
-🐞 Debugging & Testing: Ensuring code quality with thorough testing practices.
+**Upload AI** is more than just a project; it’s a journey of continuous learning, innovation, and applying best practices to create a secure, accessible, and efficient web application.
 
-🏛️ Architecture: Following clean architecture principles for a scalable structure.
-
-Upload ai is more than just a project; it’s a journey of continuous learning and innovation.
 
 ## 🚀 Current Status
 
