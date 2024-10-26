@@ -3,9 +3,10 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "outDir": "./out-tsc/app",
+    "outDir": "./out-tsc/test",
     "types": [
-      "node"
+      "jest",
+      "@angular/localize"
     ]
   },
   "files": [
@@ -14,6 +15,6 @@
     "server.ts"
   ],
   "include": [
-    "src/**/*.d.ts"
+    "src/**/*.test.ts"
   ]
 }
