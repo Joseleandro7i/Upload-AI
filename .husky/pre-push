@@ -1,0 +1,51 @@
+#!/bin/sh
+
+# Get the current branch name
+BRANCH_NAME=$(git symbolic-ref --short HEAD)
+
+EXPECTED_REMOTE_URL="https://github.com/Jose-leandro/Stellar.git"
+
+# Retrieve the remote URL of the current repository
+REMOTE_URL=$(git config --get remote.origin.url)
+
+# Function to print a message and exit with a status code
+abort_with_message() {
+  echo "$1"
+  exit "$2"
+}
+
+# Function to merge and push
+merge_and_push() {
+  TARGET_BRANCH=$1
+  echo "Merging $BRANCH_NAME into $TARGET_BRANCH..."
+  git checkout $TARGET_BRANCH
+  git merge --no-ff "$BRANCH_NAME" || abort_with_message "Merge failed. Aborting." 3
+  echo "Pushing $TARGET_BRANCH to remote..."
+  git push "$EXPECTED_REMOTE_URL" "$TARGET_BRANCH" || abort_with_message "Push failed. Aborting." 4
+  git checkout "$BRANCH_NAME"
+}
+
+# Check if the current remote URL matches the expected URL
+if [ "$REMOTE_URL" == "$EXPECTED_REMOTE_URL" ]; then
+  echo "Remote URL matches. Proceeding with safe actions."
+
+  if echo "$BRANCH_NAME" | grep -q "^feature/"; then
+    echo "Feature branch detected ($BRANCH_NAME). Automatically pushing changes."
+    git push "$EXPECTED_REMOTE_URL" "$BRANCH_NAME"
+
+  elif echo "$BRANCH_NAME" | grep -q "^bugfix/"; then
+    echo "Bugfix branch detected ($BRANCH_NAME). Merging into 'develop' and pushing changes."
+    merge_and_push "develop"
+
+  elif echo "$BRANCH_NAME" | grep -q "^hotfix/"; then
+    echo "Hotfix branch detected ($BRANCH_NAME). Merging into 'main' and pushing changes."
+    merge_and_push "main"
+
+  else
+    abort_with_message "This branch does not match the feature/, bugfix/, or hotfix/ pattern. Push manually." 1
+  fi
+
+else
+  # Remote URL does not match the expected URL
+  abort_with_message "Warning: Remote URL does not match the expected repository. Aborting push." 2
+fi

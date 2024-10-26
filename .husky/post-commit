@@ -1,0 +1,11 @@
+# Ensure the pre-push script is executable
+chmod +x .husky/pre-push
+
+# Call the pre-push hook
+echo "Calling pre-push hook..."
+if .husky/pre-push; then
+  echo "Pre-push hook executed successfully."
+else
+  echo "Pre-push hook failed."
+  exit 1
+fi

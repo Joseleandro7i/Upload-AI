@@ -1,0 +1,24 @@
+
+# echo "Running Prettier..."
+# npx prettier --write .
+# echo "Prettier done!"
+
+# echo "Running Lint..."
+# npm run lint
+# echo "Lint done!"
+
+# echo "Checking for outdated packages..."
+# npm outdated
+# echo "Outdated packages check complete!"
+
+# echo "Updating dependencies..."
+# npx npm-check-updates -u
+# echo "Dependencies updated!"
+
+# echo "Installing packages..."
+# npm install
+# echo "Packages installed!"
+
+# echo "Running Snyk tests..."
+# snyk:test
+# echo "Snyk tests completed!"
