@@ -1,0 +1,12 @@
+<Select onValueChange={handlePromptSelected}>
+    <SelectTrigger>
+        <SelectValue placeholder="Selecione um prompt..." />
+    </SelectTrigger>
+    <SelectContent>
+        {prompts?.map(prompt => (
+            <SelectItem key={prompt.id} value={prompt.id}>
+                {prompt.title}
+            </SelectItem>
+        ))}
+    </SelectContent>
+</Select>
