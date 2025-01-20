@@ -44,3 +44,6 @@ Thumbs.db
 # files and floder of Storybook
 *storybook.log
 src/stories
+
+# File of text for anotacion
+anotacion.txt
