@@ -13,9 +13,10 @@ export class AppComponent {
 
   temperature: number = 0.5;
   videoId: string | null = null;
-
-  setTemperature(value: number): void {
-    this.temperature = value;
+  
+  onTemperatureChange(event: Event) {
+    const inputValue = parseFloat((event.target as HTMLInputElement).value);
+    this.temperature = inputValue;
   }
 
   setVideoId(id: string | null): void {
