@@ -7,86 +7,86 @@
     <div className="flex items-center gap-3">
       <span className="text-sm text-muted-foreground">Desenvolvido por José leandro com 💜 no NLW da Rocketseat</span>
 
-      <Separator orientation="vertical" className="h-6" />
+      <separator orientation="vertical" className="h-6" ></separator>
 
-      <Button variant={"outline"}>
+      <button [attr.variant]="'outline'">
         <i class="fab fa-github"></i>
         GitHub
-      </Button>
+      </button>
     </div>
   </div>
 
   <main className="flex-1 p-6 flex gap-6">
     <div className="flex flex-col flex-1 gap-4">
       <div className="grid grid-rows-2 gap-4 flex-1">
-        <Textarea
+        <textarea
           placeholder="Inclua o prompt para IA..."
           className="resize-none p-4 leading-relaxed"
           value={input}
           onChange={handleInputChange}
-        />
-        <Textarea
+        ></textarea>
+        <textarea
           placeholder="Resultado gerado por AI..."
           className="resize-none p-4 leading-relaxed"
           readOnly
           value={completion}
-        />
+        ></textarea>
       </div>
 
       <p className="text-sm text-muted-foreground">
-        Lembre-se: você pode utilizar a variável <code className="text-violet-400"> {"{transcription}"} </code> no seu prompt para adicionar o contéudo da transcrição do video selecionado.
-      </p>
+        Lembre-se: você pode utilizar a variável <code>{{ '{transcription}' }}</code> no seu prompt para adicionar o conteúdo da transcrição do vídeo selecionado.
+      </p>      
     </div>
 
     <aside className="w-80 space-y-6">
 
-      <VideoInputForm onVideoUploaded={setVideoId} />
+      <video-input-form onVideoUploaded={setVideoId} />
 
-      <Separator />
+      <separator />
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="space-y-2">
-          <Label>Prompt</Label>
-          <PromptSelect onPromptSelected={setInput} />
+          <label>Prompt</label>
+          <prompt-select onPromptSelected={setInput} />
         </div>
 
         <div className="space-y-2">
-          <Label>Modelo</Label>
+          <label>Modelo</label>
 
-          <Select disabled defaultValue="gpt3.5">
-            <SelectTrigger>
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="gpt3.5">GPT 3.5-turbo 16k</SelectItem>
-            </SelectContent>
-          </Select>
+          <select disabled defaultValue="gpt3.5">
+            <selectTrigger>
+              <selectValue />
+            </selectTrigger>
+            <selectContent>
+              <selectItem value="gpt3.5">GPT 3.5-turbo 16k</selectItem>
+            </selectContent>
+          </select>
           <span className="block text-xs text-muted-foreground italic">Você poderá customizar essa opção em breve</span>
 
         </div>
 
-        <Separator />
+        <separator />
 
         <div className="space-y-4">
-          <Label>Temperatura</Label>
+          <label>Temperatura</label>
 
-          <Slider
+          <slider
             min={0}
             max={1}
             step={0.1}
             value={[temperature]}
-            onValueChange={valule => setTemperature(valule[0])}
+            (valueChange)="setTemperature($event[0])"
           />
           <span className="block text-xs text-muted-foreground italic leading-relaxed">
             valores mais altos tendem a deixar o resultado mais criativo e com possíveis erros.
           </span>
 
-          <Separator />
+          <separator />
 
-          <Button disabled={isLoading} type="submit" className="w-full">
+          <button disabled={isLoading} type="submit" className="w-full">
             Executar
             <Wand2 className="w-4 h-4 ml-2" />
-          </Button>
+          </button>
 
         </div>
       </form>
@@ -107,7 +107,7 @@
     <div class="d-flex align-items-center gap-3">
       <span class="text-muted">Desenvolvido por José Leandro com 💜 no NLW da Rocketseat</span>
 
-      <Separator orientation="vertical" className="h-6" />
+      <separator orientation="vertical" className="h-6" />
 
       <button class="btn btn-outline-secondary">
         <i class="bi bi-github"></i> GitHub
@@ -132,7 +132,7 @@
       <form (submit)="handleSubmit($event)" class="mt-3">
         <div className="mb-3">
           <label className="form-label">Prompt</label>
-          <PromptSelect onPromptSelected={setInput} />
+          <promptSelect onPromptSelected={setInput} />
         </div>
         
         <div className="mb-3">
@@ -156,8 +156,8 @@
             max="1"
             step="0.1"
             value={temperature}
-            onChange={(e) => setTemperature(parseFloat(e.target.value))}
-          />
+            (change)="onTemperatureChange($event)"
+          >
           <small className="form-text text-muted fst-italic">
             Valores mais altos tendem a deixar o resultado mais criativo e com possíveis erros.
           </small>
@@ -171,7 +171,7 @@
           type="submit"
         >
           Executar
-          <Wand2 className="ms-2" />
+          <wand2 className="ms-2" />
         </button>        
         
       </form>
