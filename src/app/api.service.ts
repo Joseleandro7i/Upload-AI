@@ -17,21 +17,21 @@ export class ApiService {
 
   // GET request
   getData(endpoint: string): Observable<any> {
-    return this.http.get(`${this.baseUrl}${endpoint}`);
+    return this.http.get(`${this.apiUrl}${endpoint}`);
   }
 
   // POST request
   postData(endpoint: string, data: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}${endpoint}`, data);
+    return this.http.post(`${this.apiUrl}${endpoint}`, data);
   }
 
   // PUT request
   updateData(endpoint: string, data: any): Observable<any> {
-    return this.http.put(`${this.baseUrl}${endpoint}`, data);
+    return this.http.put(`${this.apiUrl}${endpoint}`, data);
   }
 
   // DELETE request
   deleteData(endpoint: string): Observable<any> {
-    return this.http.delete(`${this.baseUrl}${endpoint}`);
+    return this.http.delete(`${this.apiUrl}${endpoint}`);
   }
 }
