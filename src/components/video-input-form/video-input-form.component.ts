@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { getFFmpeg } from '@/lib/ffmpeg'; // Adjust import based on your folder structure
+import { getFFmpeg } from '../../lib/ffmpeg';
 import { fetchFile } from '@ffmpeg/util';
 
 type Status = "waiting" | "converting" | "uploading" | "generating" | "success";
@@ -12,10 +12,10 @@ interface VideoResponse {
 }
 
 const statusMessage = {
-    converting: "Convertendo...",
-    generating: "Transcrevendo...",
-    uploading: "Carregando",
-    success: "Sucesso!"
+  converting: "Convertendo...",
+  generating: "Transcrevendo...",
+  uploading: "Carregando",
+  success: "Sucesso!"
 };
 
 @Component({
@@ -30,7 +30,7 @@ export class VideoInputFormComponent {
   status: Status = "waiting";
   promptInput: string = '';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   handleFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -45,7 +45,9 @@ export class VideoInputFormComponent {
     console.log("Convert started");
 
     const ffmpeg = await getFFmpeg();
-    await ffmpeg.writeFile("input.mp4", await fetchFile(video));
+    const arrayBuffer = await fetchFile(video);
+    const uint8Array = new Uint8Array(arrayBuffer);
+    await ffmpeg.writeFile("input.mp4", uint8Array);
 
     ffmpeg.on("progress", (progress: { progress: number; }) => {
       console.log("Convert progress: " + Math.round(progress.progress * 100));
@@ -65,7 +67,7 @@ export class VideoInputFormComponent {
 
     const data = await ffmpeg.readFile("output.mp3");
     const audioFileBlob = new Blob([data], { type: "audio/mpeg" });
-    
+
     return new File([audioFileBlob], "output.mp3", { type: "audio/mpeg" });
   }
 
@@ -79,7 +81,7 @@ export class VideoInputFormComponent {
     this.status = "converting";
 
     const audioFile = await this.convertVideoToAudio(this.videoFile);
-    
+
     const formData = new FormData();
     formData.append("file", audioFile);
 
@@ -93,7 +95,7 @@ export class VideoInputFormComponent {
     await this.http.post(`/api/videos/${videoId}/transcription`, { prompt: this.promptInput }).toPromise();
 
     this.status = "success";
-    
+
     this.videoUploaded.emit(videoId);
   }
 }
