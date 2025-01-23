@@ -24,6 +24,7 @@
       "dom"
     ]
   },
+  "include": ["src/**/*", "src/types/**/*"],
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
