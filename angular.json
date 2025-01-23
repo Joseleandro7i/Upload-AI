@@ -30,7 +30,10 @@
               {
                 "glob": "**/*",
                 "input": "public"
-              }
+              },
+              "src/ffmpeg/ffmpeg-core.wasm",
+              "src/ffmpeg/ffmpeg-worker.js",
+              "src/ffmpeg/ffmpeg-core.wasm"
             ],
             "styles": [
               "src/styles.scss"
