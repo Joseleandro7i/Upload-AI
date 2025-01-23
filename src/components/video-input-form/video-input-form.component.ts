@@ -5,6 +5,12 @@ import { fetchFile } from '@ffmpeg/util';
 
 type Status = "waiting" | "converting" | "uploading" | "generating" | "success";
 
+interface VideoResponse {
+  video: {
+    id: string;
+  };
+}
+
 const statusMessage = {
     converting: "Convertendo...",
     generating: "Transcrevendo...",
@@ -41,7 +47,7 @@ export class VideoInputFormComponent {
     const ffmpeg = await getFFmpeg();
     await ffmpeg.writeFile("input.mp4", await fetchFile(video));
 
-    ffmpeg.on("progress", progress => {
+    ffmpeg.on("progress", (progress: { progress: number; }) => {
       console.log("Convert progress: " + Math.round(progress.progress * 100));
     });
 
@@ -80,7 +86,7 @@ export class VideoInputFormComponent {
     this.status = "uploading";
 
     const response = await this.http.post('/api/videos', formData).toPromise(); // Adjust API URL accordingly
-    const videoId = response['video'].id;
+    const videoId = (response as VideoResponse)!['video'].id;
 
     this.status = "generating";
 
