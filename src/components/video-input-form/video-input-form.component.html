@@ -1,47 +1,40 @@
-<form onSubmit={handleuploadVideo}>
-    <label
-        htmlFor="video"
-        className="form__lable"
-    >
-        {previewURL ?
-            (
-                <iframe src={previewURL} controls={false} className="iframe-video"></iframe>
-            )
-            :
-            (
-                <>
-                    <!-- <FileVideo className="w-4 h-4" /> -->
-                    <i class="fas fa-video"></i>
-                    Selecione um video
-                </>
-            )};
+<form (ngSubmit)="handleUploadVideo()">
+    <label for="video" class="form__label">
+      <ng-container *ngIf="previewURL; else noPreview">
+        <iframe [src]="previewURL" [attr.controls]="false" class="iframe-video"></iframe>
+      </ng-container>
+      <ng-template #noPreview>
+        <i class="fas fa-video"></i>
+        Selecione um vídeo
+      </ng-template>
     </label>
-
-    <input type="file" id="video" accept="video/mp4" onChange={handleFileSelected} />
-
-    <Separator />
-    <div className="form__div">
-        <Label htmlFor="transcription_prompt">Prompt de transcrição</Label>
-        <Textarea
-            ref={promptInputRef}
-            disabled={status !== "waiting"}
-            id="transcription_prompt"
-            placeholder="Inclua plavras-chaves mencionadas no video separadas por vírgula (,)"
-        />
-        <Button
-            data-success={status === "success"}
-            disabled={status !== "waiting"}
-            type="submit"
-            className={`${status === "success" ? 'bg-success' : 'btn-primary'}`} 
-        >
-            {
-                status === "waiting" ? (
-                    <>
-                        Carregar video
-                        <!-- <Upload className="w-4 h-4 ml-2" /> -->
-                        <i class="fas fa-upload"></i>
-                    </>
-                ) : statusMessage[status]}
-        </Button>
+  
+    <input type="file" id="video" accept="video/mp4" (change)="handleFileSelected($event)" />
+  
+    <hr />
+  
+    <div class="form__div">
+      <label for="transcription_prompt">Prompt de transcrição</label>
+      <textarea
+        #promptInputRef
+        [disabled]="status !== 'waiting'"
+        id="transcription_prompt"
+        placeholder="Inclua palavras-chaves mencionadas no vídeo separadas por vírgula (,)"
+      ></textarea>
+      <button
+        [attr.data-success]="status === 'success'"
+        [disabled]="status !== 'waiting'"
+        type="submit"
+        [ngClass]="status === 'success' ? 'bg-success' : 'btn-primary'"
+      >
+        <ng-container *ngIf="status === 'waiting'; else statusMessage">
+          Carregar vídeo
+          <i class="fas fa-upload"></i>
+        </ng-container>
+        <ng-template #statusMessage>
+          {{ statusMessage[status] }}
+        </ng-template>
+      </button>
     </div>
-</form >
+  </form>
+  

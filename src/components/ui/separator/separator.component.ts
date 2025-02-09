@@ -1,4 +1,4 @@
-import { Component, Input, HostBinding } from '@angular/core';
+import { Component, Input, HostBinding, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-separator',
@@ -20,4 +20,6 @@ export class SeparatorComponent {
   @HostBinding('attr.aria-hidden') get isDecorative(): boolean {
     return this.decorative;
   }
+
+  @Output() videoUploaded = new EventEmitter<{ videoId: string }>();
 }

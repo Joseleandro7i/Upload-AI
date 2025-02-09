@@ -1,16 +1,22 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ApiService } from './api.service';
+import { SeparatorComponent } from '../components/ui/separator/separator.component';
+import { VideoInputFormComponent } from '../components/video-input-form/video-input-form.component';
+import { PromptSelectComponent } from '../components/prompt-select/prompt-select.component';
+import { SelectComponent } from '../components/ui/select/select.component';
+import { SliderComponent } from '../components/ui/slider/slider.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [
+    RouterOutlet, SeparatorComponent, VideoInputFormComponent, 
+    PromptSelectComponent, SelectComponent, SliderComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-
   temperature: number = 0.5;
   videoId: string | null = null;
   
@@ -19,8 +25,8 @@ export class AppComponent {
     this.temperature = inputValue;
   }
 
-  setVideoId(id: string | null): void {
-    this.videoId = id;
+  setVideoId(event: { videoId: string }): void {
+    const videoId = event.videoId; 
   }
 
   // const {
